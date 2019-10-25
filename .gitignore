@@ -10,6 +10,7 @@ Assets/AssetStoreTools*
 ![Aa]sset/**/*.meta
 
 ./idea
+./.idea
 [Aa]ssets/Plugins/Editor/JetBrains*
 
 # Visual Studio cache directory
