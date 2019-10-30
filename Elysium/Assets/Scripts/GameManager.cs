@@ -10,10 +10,4 @@ public class GameManager : MonoBehaviour
     {
         mBoard.Create();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
