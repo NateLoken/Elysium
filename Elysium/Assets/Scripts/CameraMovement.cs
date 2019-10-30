@@ -63,7 +63,10 @@ public class CameraMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.UpArrow))
         {
             if (interpolateCam.transform.position.y < 100 && zoomedIn)
+            {
                 transform.Translate(new Vector2(0, speed * Time.deltaTime));
+                currY = interpolateCam.transform.position.y;
+            }
         }
     }
 }
