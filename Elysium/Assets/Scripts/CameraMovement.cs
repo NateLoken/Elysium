@@ -31,7 +31,6 @@ public class CameraMovement : MonoBehaviour
         if (zoomIn)
         {
             _time += Time.deltaTime / 1.0f;
-            Debug.Log(_time);
             interpolateCam.orthographicSize = Mathf.SmoothStep(210, 105, _time);
             if (_time > 1.0f)
             {
@@ -42,10 +41,9 @@ public class CameraMovement : MonoBehaviour
 
         if (zoomOut)
         {
-            Debug.Log(currY);
             _time += Time.deltaTime / 1.0f;
             interpolateCam.orthographicSize = Mathf.SmoothStep(105, 210, _time);
-            interpolateCam.transform.Translate(new Vector3(0,0,0));
+            interpolateCam.transform.position = new Vector3(0, Mathf.SmoothStep(currY, 0, _time), -30);
             if (_time > 1.0f)
             {
                 _time = 0;
