@@ -39,7 +39,7 @@ public class CameraMovement : MonoBehaviour
             }
         }
 
-        if (zoomOut)
+        else if (zoomOut)
         {
             _time += Time.deltaTime / 1.0f;
             interpolateCam.orthographicSize = Mathf.SmoothStep(120, 210, _time);
