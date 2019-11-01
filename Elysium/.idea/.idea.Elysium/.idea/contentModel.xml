@@ -13,6 +13,16 @@
           <e p="EndTurn.cs" t="Include" />
           <e p="GameManager.cs" t="Include" />
           <e p="MainMenu.cs" t="Include" />
+          <e p="Pieces" t="Include">
+            <e p="Ares.cs" t="Include" />
+            <e p="Artemis.cs" t="Include" />
+            <e p="BasePiece.cs" t="Include" />
+            <e p="Demeter.cs" t="Include" />
+            <e p="Hades.cs" t="Include" />
+            <e p="Hermes.cs" t="Include" />
+            <e p="Poseidon.cs" t="Include" />
+            <e p="Zeus.cs" t="Include" />
+          </e>
         </e>
         <e p="TextMesh Pro" t="Include">
           <e p="Examples &amp; Extras" t="Include">
@@ -34,10 +44,6 @@
               <e p="ShaderPropAnimator.cs" t="Include" />
               <e p="SimpleScript.cs" t="Include" />
               <e p="SkewTextExample.cs" t="Include" />
-              <e p="TeleType.cs" t="Include" />
-              <e p="TextConsoleSimulator.cs" t="Include" />
-              <e p="TextMeshProFloatingText.cs" t="Include" />
-              <e p="TextMeshSpawner.cs" t="Include" />
               <e p="TMP_DigitValidator.cs" t="Include" />
               <e p="TMP_ExampleScript_01.cs" t="Include" />
               <e p="TMP_FrameRateCounter.cs" t="Include" />
@@ -49,6 +55,10 @@
               <e p="TMP_TextSelector_B.cs" t="Include" />
               <e p="TMP_UiFrameRateCounter.cs" t="Include" />
               <e p="TMPro_InstructionOverlay.cs" t="Include" />
+              <e p="TeleType.cs" t="Include" />
+              <e p="TextConsoleSimulator.cs" t="Include" />
+              <e p="TextMeshProFloatingText.cs" t="Include" />
+              <e p="TextMeshSpawner.cs" t="Include" />
               <e p="VertexColorCycler.cs" t="Include" />
               <e p="VertexJitter.cs" t="Include" />
               <e p="VertexShakeA.cs" t="Include" />
