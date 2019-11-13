@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PieceManager: MonoBehaviour
 {
+    public static BasePiece targetUnit;
     public void rejuvination(Player player, BasePiece piece)
     {
         int endTurn = player.Turn + 5;
@@ -57,5 +58,14 @@ public class PieceManager: MonoBehaviour
         {
             enemyPiece.Strength += 100;
         }
+    }
+
+    public static void MovePiece(BasePiece unit)
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            unit.transform.position = Input.mousePosition;
+        }
+        
     }
 }

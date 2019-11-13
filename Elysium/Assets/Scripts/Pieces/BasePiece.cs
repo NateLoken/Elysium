@@ -12,6 +12,9 @@ public class BasePiece : MonoBehaviour
     private int cost;
     private int posX;
     private int posY;
+    public Vector2 currentPos;
+
+    public Vector2 targetPos;
 
     public int Range { get => range; set => range = value; }
     public int Cost { get => cost; set => cost = value; }
@@ -21,5 +24,11 @@ public class BasePiece : MonoBehaviour
     public int Movement { get => movement; set => movement = value; }
     public int PosX { get => posX; set => posX = value; }
     public int PosY { get => posY; set => posY = value; }
-    
+
+    private void OnMouseDown()
+    {
+        Debug.Log("Piece clicked cum");
+        PieceManager.MovePiece(this);
+    }
+
 }
