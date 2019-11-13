@@ -138,6 +138,48 @@ PrefabInstance:
       propertyPath: mBoard
       value: 
       objectReference: {fileID: 1925736265}
+    - target: {fileID: -2563399673898468572, guid: 0d327e2a38e358b9bb84e3e4cd212046,
+        type: 3}
+      propertyPath: zeusPiece
+      value: 
+      objectReference: {fileID: 8621153971196084201, guid: 360ceecac1073f9448e1f10a2f2bc7a2,
+        type: 3}
+    - target: {fileID: -2563399673898468572, guid: 0d327e2a38e358b9bb84e3e4cd212046,
+        type: 3}
+      propertyPath: artemisPiece
+      value: 
+      objectReference: {fileID: 8089832051094308357, guid: 2dff81888d70f0946820ff519da17773,
+        type: 3}
+    - target: {fileID: -2563399673898468572, guid: 0d327e2a38e358b9bb84e3e4cd212046,
+        type: 3}
+      propertyPath: aresPiece
+      value: 
+      objectReference: {fileID: 5912323574102961656, guid: e0a9133e7c38242458df6189e08479d5,
+        type: 3}
+    - target: {fileID: -2563399673898468572, guid: 0d327e2a38e358b9bb84e3e4cd212046,
+        type: 3}
+      propertyPath: demeterPiece
+      value: 
+      objectReference: {fileID: 5428903803169743937, guid: 75a8a798103a73f46aa7bcbe67063c57,
+        type: 3}
+    - target: {fileID: -2563399673898468572, guid: 0d327e2a38e358b9bb84e3e4cd212046,
+        type: 3}
+      propertyPath: hadesPiece
+      value: 
+      objectReference: {fileID: 5640859853373256641, guid: b68fa4aed41b6874ba1fa98c3a46c4bd,
+        type: 3}
+    - target: {fileID: -2563399673898468572, guid: 0d327e2a38e358b9bb84e3e4cd212046,
+        type: 3}
+      propertyPath: hermesPiece
+      value: 
+      objectReference: {fileID: 4513929565636386219, guid: ec52d92ab67e73e4981757ea550de0fd,
+        type: 3}
+    - target: {fileID: -2563399673898468572, guid: 0d327e2a38e358b9bb84e3e4cd212046,
+        type: 3}
+      propertyPath: posiedonPiece
+      value: 
+      objectReference: {fileID: 8150041141947339735, guid: 8816c05628559034cac458e764133fb8,
+        type: 3}
     - target: {fileID: 1685950248791821859, guid: 0d327e2a38e358b9bb84e3e4cd212046,
         type: 3}
       propertyPath: m_LocalPosition.x
