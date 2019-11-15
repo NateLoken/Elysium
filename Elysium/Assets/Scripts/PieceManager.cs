@@ -44,7 +44,7 @@ public class PieceManager: MonoBehaviour
         for (int i = 0; i < mPieceOrder.Length; i++)
         {
             GameObject newPieceObject = Instantiate(mPiecePrefab, transform, true);
-            newPieceObject.transform.localScale = new Vector3(1,1,1);
+            newPieceObject.transform.localScale = new Vector3(0.15f,0.15f,1);
             newPieceObject.transform.localRotation = Quaternion.identity;
             
             string key = mPieceOrder[i];
@@ -52,7 +52,9 @@ public class PieceManager: MonoBehaviour
             BasePiece newPiece = (BasePiece) newPieceObject.AddComponent(pieceType);
             newPieces.Add(newPiece);
             newPiece.Setup(teamColor,spriteColor,this);
-            transform.parent = GameObject.Find("Parent Canvas").transform;
+            Canvas canvas = (Canvas)GameObject.FindObjectOfType(typeof(Canvas));
+            GameObject canvasGameObject = canvas.gameObject;
+            newPieceObject.transform.parent = canvasGameObject.transform;
         }
 
         return newPieces;
