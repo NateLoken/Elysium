@@ -548,6 +548,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PR_Board
       objectReference: {fileID: 0}
+    - target: {fileID: 7231872053085201626, guid: 2b0598a4e6d9c474fa477b509998e29c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Board
+      objectReference: {fileID: 0}
     - target: {fileID: 2055057102217185399, guid: 2b0598a4e6d9c474fa477b509998e29c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -777,7 +782,7 @@ GameObject:
   - component: {fileID: 1549291105}
   m_Layer: 0
   m_Name: Parent Canvas
-  m_TagString: Untagged
+  m_TagString: Canvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
