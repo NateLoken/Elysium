@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Elysium/Assets/Prefabs/Pieces.meta
 guid: fc7f5c801549d0c48946af3e269d0660
+=======
+guid: 5f225c2262fbdf64099a4bc617341e97
+>>>>>>> feature-movement:Elysium/Assets/Prefabs/Pieces.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
