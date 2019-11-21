@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
     public GameObject blackKnight;
     public GameObject blackRook;
     public GameObject blackPawn;
-
+    
     private GameObject[,] pieces;
     private List<GameObject> movedPawns;
 
@@ -58,6 +58,10 @@ public class GameManager : MonoBehaviour
     private Player black;
     public Player currentPlayer;
     public Player otherPlayer;
+
+    Rook rook;
+
+    int range = 2;
 
     void Awake()
     {
@@ -88,12 +92,12 @@ public class GameManager : MonoBehaviour
         AddPiece(whiteBishop, white, 5, 0);
         AddPiece(whiteKnight, white, 6, 0);
         AddPiece(whiteRook, white, 7, 0);
-
+        /*
         for (int i = 0; i < 8; i++)
         {
             AddPiece(whitePawn, white, i, 1);
         }
-
+        */
         AddPiece(blackRook, black, 0, 7);
         AddPiece(blackKnight, black, 1, 7);
         AddPiece(blackBishop, black, 2, 7);
@@ -102,11 +106,12 @@ public class GameManager : MonoBehaviour
         AddPiece(blackBishop, black, 5, 7);
         AddPiece(blackKnight, black, 6, 7);
         AddPiece(blackRook, black, 7, 7);
-
+        /*
         for (int i = 0; i < 8; i++)
         {
             AddPiece(blackPawn, black, i, 6);
         }
+        */
     }
 
     public void AddPiece(GameObject prefab, Player player, int col, int row)
@@ -236,8 +241,13 @@ public class GameManager : MonoBehaviour
 
     public void NextPlayer()
     {
-        Player tempPlayer = currentPlayer;
-        currentPlayer = otherPlayer;
-        otherPlayer = tempPlayer;
+        if (range == 0)
+        {
+            Player tempPlayer = currentPlayer;
+            currentPlayer = otherPlayer;
+            otherPlayer = tempPlayer;
+            range = 3;
+        }
+        range--;
     }
 }
