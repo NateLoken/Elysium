@@ -28,7 +28,9 @@
  * THE SOFTWARE.
  */
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -36,7 +38,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public Board board;
-
+    public GameModes gameMode;
+    
     public GameObject whiteKing;
     public GameObject whiteQueen;
     public GameObject whiteBishop;
@@ -80,34 +83,61 @@ public class GameManager : MonoBehaviour
 
     private void InitialSetup()
     {
-        AddPiece(whiteRook, white, 0, 0);
-        AddPiece(whiteKnight, white, 1, 0);
-        AddPiece(whiteBishop, white, 2, 0);
-        AddPiece(whiteQueen, white, 3, 0);
-        AddPiece(whiteKing, white, 4, 0);
-        AddPiece(whiteBishop, white, 5, 0);
-        AddPiece(whiteKnight, white, 6, 0);
-        AddPiece(whiteRook, white, 7, 0);
-        
-        for (int i = 0; i < 8; i++)
+        switch (gameMode)
         {
-            AddPiece(whitePawn, white, i, 1);
+            case GameModes.CHESS:
+                AddPiece(whiteRook, white, 0, 0);
+                AddPiece(whiteKnight, white, 1, 0);
+                AddPiece(whiteBishop, white, 2, 0);
+                AddPiece(whiteQueen, white, 3, 0);
+                AddPiece(whiteKing, white, 4, 0);
+                AddPiece(whiteBishop, white, 5, 0);
+                AddPiece(whiteKnight, white, 6, 0);
+                AddPiece(whiteRook, white, 7, 0);
+        
+                for (int i = 0; i < 8; i++)
+                {
+                    AddPiece(whitePawn, white, i, 1);
+                }
+        
+                AddPiece(blackRook, black, 0, 7);
+                AddPiece(blackKnight, black, 1, 7);
+                AddPiece(blackBishop, black, 2, 7);
+                AddPiece(blackQueen, black, 3, 7);
+                AddPiece(blackKing, black, 4, 7);
+                AddPiece(blackBishop, black, 5, 7);
+                AddPiece(blackKnight, black, 6, 7);
+                AddPiece(blackRook, black, 7, 7);
+        
+                for (int i = 0; i < 8; i++)
+                {
+                    AddPiece(blackPawn, black, i, 6);
+                }
+
+                break;
+            case GameModes.CHESS961:
+                // white pieces in order
+                GameObject[] chess961White = new[]
+                    {whiteRook, whiteKnight, whiteBishop, whiteQueen, whiteKing, whiteBishop, whiteKnight, whiteRook};
+                
+                // black pieces in order
+                GameObject[] chess961Black = new[]
+                    {blackRook, blackKnight, blackBishop, blackQueen, blackKing, blackBishop, blackKnight, blackRook};
+                
+                // randomize each position
+                int[] numbers = new [] {0, 1, 2, 3, 4, 5, 6, 7};
+                int[] shuffled = numbers.OrderBy(n => Guid.NewGuid()).ToArray();
+
+                // initialize pieces with random positions (mirrored)
+                for (int i = 0; i < 8; i++)
+                {
+                    AddPiece(chess961White[shuffled[i]], white, i, 0);
+                    AddPiece(chess961Black[shuffled[i]], black, i, 7);
+                    AddPiece(whitePawn, white, i, 1);
+                    AddPiece(blackPawn, black, i, 6);
+                }
+                break;
         }
-        
-        AddPiece(blackRook, black, 0, 7);
-        AddPiece(blackKnight, black, 1, 7);
-        AddPiece(blackBishop, black, 2, 7);
-        AddPiece(blackQueen, black, 3, 7);
-        AddPiece(blackKing, black, 4, 7);
-        AddPiece(blackBishop, black, 5, 7);
-        AddPiece(blackKnight, black, 6, 7);
-        AddPiece(blackRook, black, 7, 7);
-        
-        for (int i = 0; i < 8; i++)
-        {
-            AddPiece(blackPawn, black, i, 6);
-        }
-        
     }
 
     public void AddPiece(GameObject prefab, Player player, int col, int row)
@@ -241,5 +271,4 @@ public class GameManager : MonoBehaviour
         currentPlayer = otherPlayer;
         otherPlayer = tempPlayer;
     }
-
 }
