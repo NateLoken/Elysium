@@ -209,16 +209,28 @@ public class GameManager : MonoBehaviour
 
     public void CapturePieceAt(Vector2Int gridPoint)
     {
-        GameObject pieceToCapture = PieceAtGrid(gridPoint);
-        if (pieceToCapture.GetComponent<Piece>().type == PieceType.King)
+        switch (gameMode)
         {
-            Debug.Log(currentPlayer.name + " wins!");
-            Destroy(board.GetComponent<TileSelector>());
-            Destroy(board.GetComponent<MoveSelector>());
+            case GameModes.CHESS:
+
+                GameObject pieceToCapture = PieceAtGrid(gridPoint);
+                if (pieceToCapture.GetComponent<Piece>().type == PieceType.King)
+                {
+                    Debug.Log(currentPlayer.name + " wins!");
+                    Destroy(board.GetComponent<TileSelector>());
+                    Destroy(board.GetComponent<MoveSelector>());
+                }
+
+                currentPlayer.capturedPieces.Add(pieceToCapture);
+                pieces[gridPoint.x, gridPoint.y] = null;
+                Destroy(pieceToCapture);
+                break;
+            case GameModes.CHESS961:
+                break;
+            case GameModes.OVERTHROW:
+                break;
+                
         }
-        currentPlayer.capturedPieces.Add(pieceToCapture);
-        pieces[gridPoint.x, gridPoint.y] = null;
-        Destroy(pieceToCapture);
     }
 
     public void SelectPiece(GameObject piece)
