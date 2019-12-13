@@ -38,8 +38,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public Board board;
-    public GameModes gameMode;
-    
+    public static GameModes gameMode;
+
     public GameObject whiteKing;
     public GameObject whiteQueen;
     public GameObject whiteBishop;
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
     public GameObject blackKnight;
     public GameObject blackRook;
     public GameObject blackPawn;
-    
+
     private GameObject[,] pieces;
     private List<GameObject> movedPawns;
 
@@ -62,12 +62,14 @@ public class GameManager : MonoBehaviour
     public Player currentPlayer;
     public Player otherPlayer;
 
+    public int overthrowPawns;
+
     void Awake()
     {
         instance = this;
     }
 
-    void Start ()
+    void Start()
     {
         pieces = new GameObject[8, 8];
         movedPawns = new List<GameObject>();
@@ -94,12 +96,12 @@ public class GameManager : MonoBehaviour
                 AddPiece(whiteBishop, white, 5, 0);
                 AddPiece(whiteKnight, white, 6, 0);
                 AddPiece(whiteRook, white, 7, 0);
-        
+
                 for (int i = 0; i < 8; i++)
                 {
                     AddPiece(whitePawn, white, i, 1);
                 }
-        
+
                 AddPiece(blackRook, black, 0, 7);
                 AddPiece(blackKnight, black, 1, 7);
                 AddPiece(blackBishop, black, 2, 7);
@@ -108,24 +110,24 @@ public class GameManager : MonoBehaviour
                 AddPiece(blackBishop, black, 5, 7);
                 AddPiece(blackKnight, black, 6, 7);
                 AddPiece(blackRook, black, 7, 7);
-        
+
                 for (int i = 0; i < 8; i++)
                 {
                     AddPiece(blackPawn, black, i, 6);
                 }
 
                 break;
-            case GameModes.CHESS961:
+            case GameModes.RANDOMCHESS:
                 // white pieces in order
                 GameObject[] chess961White = new[]
                     {whiteRook, whiteKnight, whiteBishop, whiteQueen, whiteKing, whiteBishop, whiteKnight, whiteRook};
-                
+
                 // black pieces in order
                 GameObject[] chess961Black = new[]
                     {blackRook, blackKnight, blackBishop, blackQueen, blackKing, blackBishop, blackKnight, blackRook};
-                
+
                 // randomize each position
-                int[] numbers = new [] {0, 1, 2, 3, 4, 5, 6, 7};
+                int[] numbers = new[] { 0, 1, 2, 3, 4, 5, 6, 7 };
                 int[] shuffled = numbers.OrderBy(n => Guid.NewGuid()).ToArray();
 
                 // initialize pieces with random positions (mirrored)
@@ -138,17 +140,54 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameModes.OVERTHROW:
+                overthrowPawns = 24;
                 for (int i = 0; i < 8; i++)
                 {
                     AddPiece(whitePawn, white, i, 0);
                     AddPiece(whitePawn, white, i, 1);
                     AddPiece(whitePawn, white, i, 2);
                 }
-                
-                AddPiece(blackQueen, black, 4, 7);
-                AddPiece(blackKnight, black, 3, 7);
+
+                AddPiece(blackKing, black, 4, 7);
+                AddPiece(blackQueen, black, 3, 7);
+                AddPiece(blackKnight, black, 2, 7);
                 AddPiece(blackKnight, black, 5, 7);
+
+                AddPiece(blackKnight, black, 2, 6);
+                AddPiece(blackKnight, black, 3, 6);
+                AddPiece(blackKnight, black, 4, 6);
+                AddPiece(blackKnight, black, 5, 6);
                 break;
+            case GameModes.KNIGHTSROYALTY:
+                AddPiece(whiteRook, white, 0, 0);
+                AddPiece(whiteKing, white, 1, 0);
+                AddPiece(whiteBishop, white, 2, 0);
+                AddPiece(whiteQueen, white, 3, 0);
+                AddPiece(whiteKnight, white, 4, 0);
+                AddPiece(whiteBishop, white, 5, 0);
+                AddPiece(whiteKing, white, 6, 0);
+                AddPiece(whiteRook, white, 7, 0);
+
+                for (int i = 0; i < 8; i++)
+                {
+                    AddPiece(whitePawn, white, i, 1);
+                }
+
+                AddPiece(blackRook, black, 0, 7);
+                AddPiece(blackKing, black, 1, 7);
+                AddPiece(blackBishop, black, 2, 7);
+                AddPiece(blackQueen, black, 3, 7);
+                AddPiece(blackKnight, black, 4, 7);
+                AddPiece(blackBishop, black, 5, 7);
+                AddPiece(blackKing, black, 6, 7);
+                AddPiece(blackRook, black, 7, 7);
+
+                for (int i = 0; i < 8; i++)
+                {
+                    AddPiece(blackPawn, black, i, 6);
+                }
+                break;
+
         }
     }
 
@@ -213,23 +252,69 @@ public class GameManager : MonoBehaviour
         {
             case GameModes.CHESS:
 
-                GameObject pieceToCapture = PieceAtGrid(gridPoint);
-                if (pieceToCapture.GetComponent<Piece>().type == PieceType.King)
+                GameObject pieceToCaptureCHESS = PieceAtGrid(gridPoint);
+                if (pieceToCaptureCHESS.GetComponent<Piece>().type == PieceType.King)
                 {
                     Debug.Log(currentPlayer.name + " wins!");
                     Destroy(board.GetComponent<TileSelector>());
                     Destroy(board.GetComponent<MoveSelector>());
                 }
 
-                currentPlayer.capturedPieces.Add(pieceToCapture);
+                currentPlayer.capturedPieces.Add(pieceToCaptureCHESS);
                 pieces[gridPoint.x, gridPoint.y] = null;
-                Destroy(pieceToCapture);
+                Destroy(pieceToCaptureCHESS);
                 break;
-            case GameModes.CHESS961:
+            case GameModes.RANDOMCHESS:
+                GameObject pieceToCaptureCHESS961 = PieceAtGrid(gridPoint);
+                if (pieceToCaptureCHESS961.GetComponent<Piece>().type == PieceType.King)
+                {
+                    Debug.Log(currentPlayer.name + " wins!");
+                    Destroy(board.GetComponent<TileSelector>());
+                    Destroy(board.GetComponent<MoveSelector>());
+                }
+
+                currentPlayer.capturedPieces.Add(pieceToCaptureCHESS961);
+                pieces[gridPoint.x, gridPoint.y] = null;
+                Destroy(pieceToCaptureCHESS961);
                 break;
+
             case GameModes.OVERTHROW:
+                GameObject pieceToCaptureOVERTHROW = PieceAtGrid(gridPoint);
+                if (pieceToCaptureOVERTHROW.GetComponent<Piece>().type == PieceType.King)
+                {
+                    Debug.Log(currentPlayer.name + " wins!");
+                    Destroy(board.GetComponent<TileSelector>());
+                    Destroy(board.GetComponent<MoveSelector>());
+                }
+
+                if (pieceToCaptureOVERTHROW.GetComponent<Piece>().type == PieceType.Pawn)
+                {
+                    overthrowPawns--;
+                }
+
+                if (overthrowPawns == 0)
+                {
+                    Debug.Log(currentPlayer.name + " wins!");
+                    Destroy(board.GetComponent<TileSelector>());
+                    Destroy(board.GetComponent<MoveSelector>());
+                }
+                currentPlayer.capturedPieces.Add(pieceToCaptureOVERTHROW);
+                pieces[gridPoint.x, gridPoint.y] = null;
+                Destroy(pieceToCaptureOVERTHROW);
                 break;
-                
+            case GameModes.KNIGHTSROYALTY:
+                GameObject pieceToCaptureKNIGHTSROYALTY = PieceAtGrid(gridPoint);
+                if (pieceToCaptureKNIGHTSROYALTY.GetComponent<Piece>().type == PieceType.Knight)
+                {
+                    Debug.Log(currentPlayer.name + " wins!");
+                    Destroy(board.GetComponent<TileSelector>());
+                    Destroy(board.GetComponent<MoveSelector>());
+                }
+
+                currentPlayer.capturedPieces.Add(pieceToCaptureKNIGHTSROYALTY);
+                pieces[gridPoint.x, gridPoint.y] = null;
+                Destroy(pieceToCaptureKNIGHTSROYALTY);
+                break;
         }
     }
 
@@ -259,7 +344,7 @@ public class GameManager : MonoBehaviour
 
     public Vector2Int GridForPiece(GameObject piece)
     {
-        for (int i = 0; i < 8; i++) 
+        for (int i = 0; i < 8; i++)
         {
             for (int j = 0; j < 8; j++)
             {
@@ -277,7 +362,8 @@ public class GameManager : MonoBehaviour
     {
         GameObject piece = PieceAtGrid(gridPoint);
 
-        if (piece == null) {
+        if (piece == null)
+        {
             return false;
         }
 
