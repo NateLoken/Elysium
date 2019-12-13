@@ -2,5 +2,5 @@
 {
     CHESS,
     CHESS961,
-    CHESS420
+    OVERTHROW
 };

@@ -137,6 +137,18 @@ public class GameManager : MonoBehaviour
                     AddPiece(blackPawn, black, i, 6);
                 }
                 break;
+            case GameModes.OVERTHROW:
+                for (int i = 0; i < 8; i++)
+                {
+                    AddPiece(whitePawn, white, i, 0);
+                    AddPiece(whitePawn, white, i, 1);
+                    AddPiece(whitePawn, white, i, 2);
+                }
+                
+                AddPiece(blackQueen, black, 4, 7);
+                AddPiece(blackKnight, black, 3, 7);
+                AddPiece(blackKnight, black, 5, 7);
+                break;
         }
     }
 
